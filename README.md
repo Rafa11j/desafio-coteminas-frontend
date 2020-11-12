@@ -1,46 +1,45 @@
-# Getting Started with Create React App
+# Desafio Coteminas (Frontend)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Tecnologias Utilizadas
 
-## Available Scripts
+- React
+- TypeScript
+- Styled Components
+- Eslint
+- Prettier
 
-In the project directory, you can run:
+## Requisitos para executar o projeto
 
-### `yarn start`
+Para executar o projeto, será necessário ter os seguintes requisitos: 
+- Nodejs 
+- Yarn
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Configuração do projeto
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Passo 1 - Baixar as dependencias do projeto:
 
-### `yarn test`
+  Execute o seguinte comando:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+  yarn install
+``` 
 
-### `yarn build`
+### Passo 2 - Configurar variáveis de ambiente:
+ 
+ Renomear o arquio `.env.example` para `.env`. Este arquivo contem as variáveis de ambiente necessárias para executar o projeto. Entre elas temos:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+ - `DATABASE_URL`: onde você passará a configuração do seu banco de dados. `postgres://{username}:{password}@{host}:{port}/{database}`. Renomei os variáveis pelas do seu banco.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+ - `NODE_ENV`: para controlar o ambiente da aplicação se estará em `development`(desenvolvimento) ou `production`(produção). Por padrão deixe em `development`.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+ - `REACT_APP_API_URL`: url da api para realizarmos a comunicação do frontend com o backend . Por padrão deixe em `http://localhost:3333`.
 
-### `yarn eject`
+### Passo 3 - Executando o Projeto:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+ Dando tudo certo nos passos anteriores, basta executar o seguinte comando:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+  yarn start
+``` 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+A aplicação subirá na seguinte url: [http://localhost:3000](http://localhost:3000)
