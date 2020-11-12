@@ -13,10 +13,12 @@ import {
   Divider,
   Select,
   Actions,
+  Loading,
 } from './styles';
 
 const Grid: React.FC = () => {
   const { search } = useSearch();
+  const [loading, setLoading] = useState(false);
   const [elementsPerPage, setElementsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(0);
   const [data, setData] = useState<IPaginated>({
@@ -31,6 +33,7 @@ const Grid: React.FC = () => {
   });
 
   const loadProducts = useCallback(async () => {
+    setLoading(true);
     try {
       const params = {
         elementsPerPage,
@@ -39,7 +42,9 @@ const Grid: React.FC = () => {
       };
       const response = await api.get('/products', { params });
       setData(response.data);
+      setLoading(false);
     } catch {
+      setLoading(false);
       store.addNotification({
         title: 'Erro',
         message: 'Falha ao carregar produtos',
@@ -73,31 +78,40 @@ const Grid: React.FC = () => {
 
   return (
     <Container>
-      <TitleProductsFound>
-        {`${data.totalElements} PRODUTOS ENCONTRADOS`}
-      </TitleProductsFound>
-      <GridBody>
-        {data.data.map(product => (
-          <GridItem key={product.id} product={product} />
-        ))}
-      </GridBody>
+      {loading ? (
+        <Loading>
+          <h1>Carregando...</h1>
+        </Loading>
+      ) : (
+        <>
+          <TitleProductsFound>
+            {`${data.totalElements} PRODUTOS ENCONTRADOS`}
+          </TitleProductsFound>
 
-      <Divider />
+          <GridBody>
+            {data.data.map(product => (
+              <GridItem key={product.id} product={product} />
+            ))}
+          </GridBody>
 
-      <Actions>
-        <Select onChange={changeElementsPerPage} value={elementsPerPage}>
-          <option value={5}>05 produtos por página</option>
-          <option value={10}>10 produtos por página</option>
-          <option value={15}>15 produtos por página</option>
-          <option value={20}>20 produtos por página</option>
-        </Select>
+          <Divider />
 
-        <Pagination
-          pagesNumber={data.totalPages}
-          changePage={changePage}
-          defaultPage={currentPage + 1}
-        />
-      </Actions>
+          <Actions>
+            <Select onChange={changeElementsPerPage} value={elementsPerPage}>
+              <option value={5}>05 produtos por página</option>
+              <option value={10}>10 produtos por página</option>
+              <option value={15}>15 produtos por página</option>
+              <option value={20}>20 produtos por página</option>
+            </Select>
+
+            <Pagination
+              pagesNumber={data.totalPages}
+              changePage={changePage}
+              defaultPage={currentPage + 1}
+            />
+          </Actions>
+        </>
+      )}
     </Container>
   );
 };

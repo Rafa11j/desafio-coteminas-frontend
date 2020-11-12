@@ -34,3 +34,10 @@ export const Actions = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
+
+export const Loading = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
